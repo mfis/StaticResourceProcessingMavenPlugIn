@@ -5,7 +5,7 @@
 	<artifactId>StaticResourceProcessingMavenPlugIn</artifactId>
 	<version>0.0.1</version>
 	<packaging>maven-plugin</packaging>
- 
+
 	<name>StaticResourceProcessingMavenPlugIn</name>
 
 	<dependencies>
@@ -26,7 +26,6 @@
 	<build>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -36,15 +35,9 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-plugin-plugin
-										</artifactId>
-										<versionRange>
-											[3.2,)
-										</versionRange>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-plugin-plugin</artifactId>
+										<versionRange>[3.2,)</versionRange>
 										<goals>
 											<goal>descriptor</goal>
 										</goals>
