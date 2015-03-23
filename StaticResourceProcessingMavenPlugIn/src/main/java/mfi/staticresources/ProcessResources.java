@@ -16,29 +16,70 @@ public class ProcessResources {
 
 	public String processJS(String content) {
 
+		content = minifyJS(content);
+
 		return content;
 	}
 
 	private String minifyCSS(String content) {
 
 		content = deleteBetween(content, "/*", "*/");
+
 		content = replace(content, "\t", "");
 		content = replace(content, "\r", "");
 		content = replace(content, "\n\n", "\n");
-		content = replace(content, " \n", "\n");
-		content = replace(content, "\n ", "\n");
-		content = replace(content, " {", "{");
-		content = replace(content, ": ", ":");
-		content = replace(content, " :", ":");
+		content = trimAround(content, "\n");
+		content = trimAround(content, "{");
+		content = trimAround(content, ":");
 		content = replace(content, ",\n", ",");
-		content = replace(content, ", ", ",");
+		content = trimAround(content, ",");
 		content = replace(content, "{\n", "{");
 		content = replace(content, ";\n", ";");
 		content = replace(content, "\n}", "}");
 		content = replace(content, ";}", "}");
-		// hacks  
+		// hacks
 		content = StringUtils.replace(content, "@charset \"UTF-8\";", "@charset \"UTF-8\";\n");
-		
+
+		return content;
+	}
+
+	private String minifyJS(String content) {
+
+		content = deleteBetween(content, "//", "\n");
+		content = deleteBetween(content, "/*", "*/");
+
+		content = replace(content, "\t", "");
+		content = replace(content, "\r", "");
+		content = replace(content, "\n\n", "\n");
+		content = trimAround(content, "\n");
+		content = replace(content, "{\n", "{");
+		content = replace(content, "\n}", "}");
+		content = replace(content, ";\n", ";");
+		content = replace(content, "(\n", "(");
+		content = replace(content, "\n(", "(");
+		content = replace(content, ")\n", ")");
+		content = replace(content, "\n)", ")");
+		content = replace(content, ",\n", ",");
+		content = replace(content, "\n.", ".");
+		content = trimAround(content, "=");
+		content = trimAround(content, ">");
+		content = trimAround(content, "<");
+		content = trimAround(content, "+");
+		content = trimAround(content, "-");
+		content = trimAround(content, "}");
+		content = trimAround(content, "{");
+		content = trimAround(content, "(");
+		content = trimAround(content, ")");
+		content = trimAround(content, ",");
+
+		return content;
+	}
+
+	private String trimAround(String content, String search) {
+
+		content = replace(content, " " + search, search);
+		content = replace(content, search + " ", search);
+
 		return content;
 	}
 
