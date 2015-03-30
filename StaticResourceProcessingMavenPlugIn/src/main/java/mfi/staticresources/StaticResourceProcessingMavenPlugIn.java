@@ -72,7 +72,7 @@ public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
 		try {
 			BufferedImage resizedImage = (new ImageResize()).resize(resource, 32);
 			File dest = new File(resource.getParentFile().getAbsolutePath() + "/favicon.ico");
-			// https://github.com/imcdonagh/image4j 0.7.1
+			// doc: https://github.com/imcdonagh/image4j 0.7.1
 			ICOEncoder.write(resizedImage, dest);
 		} catch (IOException e) {
 			throw new RuntimeException(e);

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>StaticResourceProcessingMavenPlugIn</groupId>
 	<artifactId>StaticResourceProcessingMavenPlugIn</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<packaging>maven-plugin</packaging>
 
 	<name>StaticResourceProcessingMavenPlugIn</name>
@@ -14,6 +14,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.3.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
 		</dependency>
 
 		<dependency>
@@ -29,6 +35,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-plugin-api</artifactId>
 			<version>2.0</version>
@@ -41,6 +53,7 @@
 			<version>3.4</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<pluginManagement>
