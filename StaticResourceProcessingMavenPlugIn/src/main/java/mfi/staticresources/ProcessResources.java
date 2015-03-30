@@ -23,7 +23,7 @@ public class ProcessResources {
 
 	private String minifyCSS(String content) {
 
-		content = deleteBetween(content, "/*", "*/");
+		content = deleteBetween(content, "/*", "*/", "license-attribution");
 
 		content = replace(content, "\t", "");
 		content = replace(content, "\r", "");
@@ -45,8 +45,8 @@ public class ProcessResources {
 
 	private String minifyJS(String content) {
 
-		content = deleteBetween(content, "//", "\n");
-		content = deleteBetween(content, "/*", "*/");
+		content = deleteBetween(content, "//", "\n", null);
+		content = deleteBetween(content, "/*", "*/", null);
 
 		content = replace(content, "\t", "");
 		content = replace(content, "\r", "");
@@ -117,17 +117,20 @@ public class ProcessResources {
 		return content;
 	}
 
-	private String deleteBetween(String content, String start, String end) {
+	private String deleteBetween(String content, String start, String end, String exclusionContent) {
 
 		try {
-			boolean again = true;
-			while (again) {
-				String sub = StringUtils.substringBetween(content, start, end);
-				if (StringUtils.isBlank(sub)) {
-					again = false;
-				} else {
-					sub = start + sub + end;
-					content = StringUtils.replace(content, sub, "");
+			String[] subs = StringUtils.substringsBetween(content, start, end);
+			if (subs == null || subs.length == 0) {
+				// noop
+			} else {
+				for (String sub : subs) {
+					if (StringUtils.isNotBlank(exclusionContent) && StringUtils.containsIgnoreCase(sub, exclusionContent)) {
+						// noop
+					} else {
+						sub = start + sub + end;
+						content = StringUtils.replace(content, sub, "");
+					}
 				}
 			}
 		} catch (Exception e) {
