@@ -16,13 +16,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.image4j.codec.ico.ICOEncoder;
-
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
+
+import net.sf.image4j.codec.ico.ICOEncoder;
 
 @Mojo(name = "StaticResourceProcessingMavenPlugIn")
 public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
@@ -140,25 +140,32 @@ public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
 
 	private void versioning() {
 
+		boolean doHashVersions = versionsMapFile != null;
+
 		StringBuilder propstring = new StringBuilder();
 
 		File[] resources = webContentTempDir.listFiles();
 		for (File resource : resources) {
 			if (resource.isFile() && !resource.isHidden()) {
 				String name = resource.getName();
-				String hash = hash(resource);
-				propstring.append(resource.getName() + " = " + hash + "\n");
+				String hash = "";
+				if (doHashVersions) {
+					hash = hash(resource);
+					propstring.append(resource.getName() + " = " + hash + "\n");
+				}
 				File sourcefile = new File(webContentTempDir.getAbsolutePath() + "/" + name);
-				File destfile = new File(webContentDestDir.getAbsolutePath() + "/" + hash + "_" + name);
+				File destfile = new File(webContentDestDir.getAbsolutePath() + "/" + hash + (doHashVersions ? "_" : "") + name);
 				copyFile(sourcefile, destfile);
 			}
 		}
 
 		try {
-			PrintWriter propout = new PrintWriter(versionsMapFile.getAbsolutePath());
-			propout.print(propstring.toString().trim());
-			propout.flush();
-			propout.close();
+			if (doHashVersions) {
+				PrintWriter propout = new PrintWriter(versionsMapFile.getAbsolutePath());
+				propout.print(propstring.toString().trim());
+				propout.flush();
+				propout.close();
+			}
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(e);
 		}
