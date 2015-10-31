@@ -282,11 +282,13 @@ public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
 			}
 		}
 
-		if (versionsMapFile.getParentFile() != null && versionsMapFile.getParentFile().exists()) {
-			getLog().info("versionsMapFile = " + versionsMapFile.getAbsolutePath());
-		} else {
-			getLog().error("versionsMapFile parent = " + versionsMapFile.getParentFile() + " does not exist!");
-			throw new IllegalArgumentException("versionsMapFile parent = " + versionsMapFile.getParentFile() + " does not exist!");
+		if (versionsMapFile != null) {
+			if (versionsMapFile.getParentFile() != null && versionsMapFile.getParentFile().exists()) {
+				getLog().info("versionsMapFile = " + versionsMapFile.getAbsolutePath());
+			} else {
+				getLog().error("versionsMapFile parent = " + versionsMapFile.getParentFile() + " does not exist!");
+				throw new IllegalArgumentException("versionsMapFile parent = " + versionsMapFile.getParentFile() + " does not exist!");
+			}
 		}
 	}
 }

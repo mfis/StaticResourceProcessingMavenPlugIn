@@ -1,6 +1,7 @@
 package mfi.staticresources;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,10 +15,12 @@ public class ImageResize {
 		BufferedImage resizedImage;
 		try {
 			BufferedImage originalImage = ImageIO.read(source);
-			int type = BufferedImage.SCALE_SMOOTH;
-			resizedImage = new BufferedImage(size, size, type);
-			Graphics2D g = resizedImage.createGraphics();
-			g.drawImage(originalImage, 0, 0, size, size, null);
+			Image toolkitImage = originalImage.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+			int width = toolkitImage.getWidth(null);
+			int height = toolkitImage.getHeight(null);
+			resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
+			Graphics g = resizedImage.getGraphics();
+			g.drawImage(toolkitImage, 0, 0, null);
 			g.dispose();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
