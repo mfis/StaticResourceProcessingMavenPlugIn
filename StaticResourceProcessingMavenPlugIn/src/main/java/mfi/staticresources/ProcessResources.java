@@ -45,8 +45,8 @@ public class ProcessResources {
 
 	private String minifyJS(String content) {
 
-		content = deleteBetween(content, "//", "\n", null);
-		content = deleteBetween(content, "/*", "*/", null);
+		content = deleteBetween(content, "// ", "\n", null);
+		content = deleteBetween(content, "/*", " */", null);
 
 		content = replace(content, "\t", "");
 		content = replace(content, "\r", "");
@@ -71,6 +71,9 @@ public class ProcessResources {
 		content = trimAround(content, "(");
 		content = trimAround(content, ")");
 		content = trimAround(content, ",");
+		content = trimAround(content, "+");
+		content = trimAround(content, "||");
+		content = trimAround(content, "&&");
 
 		return content;
 	}
