@@ -81,7 +81,7 @@ public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
 
 	private void generateTouchIcons(File resource) {
 
-		int[] touchIconSizes = new int[] { 57, 72, 76, 114, 120, 144, 152 };
+		int[] touchIconSizes = new int[] { 57, 64, 72, 76, 114, 120, 128, 144, 152 };
 		List<ImageResizeThread> threads = new LinkedList<ImageResizeThread>();
 
 		for (int size : touchIconSizes) {
