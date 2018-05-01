@@ -24,19 +24,19 @@ import org.codehaus.plexus.util.FileUtils;
 
 import net.sf.image4j.codec.ico.ICOEncoder;
 
-@Mojo(name = "StaticResourceProcessingMavenPlugIn")
+@Mojo(name = "StaticResourceProcessing")
 public class StaticResourceProcessing extends AbstractMojo {
 
-	@Parameter(property = "StaticResourceProcessingMavenPlugIn.webContentSourceDir")
+	@Parameter(property = "StaticResourceProcessing.webContentSourceDir")
 	private File webContentSourceDir;
 
-	@Parameter(property = "StaticResourceProcessingMavenPlugIn.webContentDestDir")
+	@Parameter(property = "StaticResourceProcessing.webContentDestDir")
 	private File webContentDestDir;
 
-	@Parameter(property = "StaticResourceProcessingMavenPlugIn.webContentTempDir")
+	@Parameter(property = "StaticResourceProcessing.webContentTempDir")
 	private File webContentTempDir;
 
-	@Parameter(property = "StaticResourceProcessingMavenPlugIn.versionsMapFile")
+	@Parameter(property = "StaticResourceProcessing.versionsMapFile")
 	private File versionsMapFile;
 
 	public void execute() throws MojoExecutionException {
