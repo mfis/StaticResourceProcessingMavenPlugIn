@@ -25,7 +25,7 @@ import org.codehaus.plexus.util.FileUtils;
 import net.sf.image4j.codec.ico.ICOEncoder;
 
 @Mojo(name = "StaticResourceProcessingMavenPlugIn")
-public class StaticResourceProcessingMavenPlugIn extends AbstractMojo {
+public class StaticResourceProcessing extends AbstractMojo {
 
 	@Parameter(property = "StaticResourceProcessingMavenPlugIn.webContentSourceDir")
 	private File webContentSourceDir;
