@@ -81,11 +81,11 @@ public class StaticResourceProcessing extends AbstractMojo {
 
 	private void generateTouchIcons(File resource) {
 
-		int[] touchIconSizes = new int[] { 57, 64, 72, 76, 114, 120, 128, 144, 152 };
+		int[] touchIconSizes = new int[] { 57, 64, 72, 76, 114, 120, 128, 144, 152, 167, 180 };
 		List<ImageResizeThread> threads = new LinkedList<ImageResizeThread>();
 
 		for (int size : touchIconSizes) {
-			File dest = new File(resource.getParentFile().getAbsolutePath() + "/apple-touch-icon-" + size + "x" + size + "-precomposed.png");
+			File dest = new File(resource.getParentFile().getAbsolutePath() + "/apple-touch-icon-" + size + "x" + size + ".png");
 			ImageResizeThread t = new ImageResizeThread(resource, dest, size);
 			threads.add(t);
 			t.start();
@@ -243,7 +243,7 @@ public class StaticResourceProcessing extends AbstractMojo {
 		// clear the temp dir
 		File[] resources = webContentDestDir.listFiles();
 		for (File resource : resources) {
-			if (resource.isFile() && !resource.isHidden()) {
+			if (resource.isFile() && !resource.isHidden() && !resource.getName().equals("icon.png")) {
 				resource.delete();
 			}
 		}
