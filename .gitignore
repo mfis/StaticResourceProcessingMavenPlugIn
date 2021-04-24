@@ -4,3 +4,7 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
+/.idea/modules.xml
+/.idea/StaticResourceProcessing.iml
+/StaticResourceProcessing/StaticResourceProcessing.iml
+/.idea/vcs.xml
